@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Product from "./pages/Product.jsx";
 import Homepage from "./pages/Homepage.jsx";
@@ -8,6 +8,21 @@ import AppLayout from "./pages/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import CityList from "../components/CityList.jsx";
 function App() {
+  const [cities, setCities] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/cities")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(console.log("Done"));
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
