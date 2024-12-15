@@ -34,7 +34,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button>
+          <button className="cta">
             <NavLink to="/app">Login</NavLink>
           </button>
         </div>
