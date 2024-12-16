@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 import styles from "./City.module.css";
 import Spinner from "./Spinner";
@@ -11,6 +12,14 @@ const formatDate = (date) =>
     weekday: "long",
   }).format(new Date(date));
 
+// TEMP DATA
+// const currentCity = {
+//   cityName: "Lisbon",
+//   emoji: "🇵🇹",
+//   date: "2027-10-31T15:59:59.138Z",
+//   notes: "My favorite city so far!",
+// };
+
 function City({ cities, isLoading }) {
   if (isLoading) return <Spinner />;
 
@@ -18,13 +27,9 @@ function City({ cities, isLoading }) {
 
   const currentCity = cities.find((city) => city.id == x);
 
-  // TEMP DATA
-  // const currentCity = {
-  //   cityName: "Lisbon",
-  //   emoji: "🇵🇹",
-  //   date: "2027-10-31T15:59:59.138Z",
-  //   notes: "My favorite city so far!",
-  // };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
 
   const { cityName, emoji, date, notes } = currentCity;
 
